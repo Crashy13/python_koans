@@ -14,36 +14,46 @@ class AboutAsserts(Koan):
         #
         #   http://bit.ly/about_asserts
 
-        self.assertTrue(False) # This should be True
+        # self.assertTrue(False) # This should be True
+        self.assertTrue(True) #assert dictates True must be in the ()
 
     def test_assert_with_message(self):
         """
         Enlightenment may be more easily achieved with appropriate messages.
         """
-        self.assertTrue(False, "This should be True -- Please fix this")
+        # self.assertTrue(False, "This should be True -- Please fix this")
+        self.assertTrue(True, "This should be True -- Please fix this") #assert dictates True must be in the () and can also have messages
 
     def test_fill_in_values(self):
         """
         Sometimes we will ask you to fill in the values
         """
-        self.assertEqual(__, 1 + 1)
+        # self.assertEqual(__, 1 + 1)
+        self.assertEqual(2, 1 + 1) #assert dictates what's on the left of the comma must equal what's on the right
 
     def test_assert_equality(self):
         """
         To understand reality, we must compare our expectations against reality.
         """
-        expected_value = __
+        # expected_value = __
+        # actual_value = 1 + 1
+        # self.assertTrue(expected_value == actual_value)
+        expected_value = 2
         actual_value = 1 + 1
-        self.assertTrue(expected_value == actual_value)
+        self.assertTrue(expected_value == actual_value) #assert dictates both sides of equation must be equal
 
     def test_a_better_way_of_asserting_equality(self):
         """
         Some ways of asserting equality are better than others.
         """
-        expected_value = __
+        # expected_value = __
+        # actual_value = 1 + 1
+        #
+        # self.assertEqual(expected_value, actual_value)
+        expected_value = 2
         actual_value = 1 + 1
 
-        self.assertEqual(expected_value, actual_value)
+        self.assertEqual(expected_value, actual_value) #assert dictates both sides of the comma must be equal
 
     def test_that_unittest_asserts_work_the_same_way_as_python_asserts(self):
         """
@@ -51,7 +61,8 @@ class AboutAsserts(Koan):
         """
 
         # This throws an AssertionError exception
-        assert False
+        # assert False
+        assert True #assert needs to be set to True
 
     def test_that_sometimes_we_need_to_know_the_class_type(self):
         """
@@ -70,9 +81,8 @@ class AboutAsserts(Koan):
         #
         # See for yourself:
 
-        self.assertEqual(__, "navel".__class__) # It's str, not <type 'str'>
+        self.assertEqual(str, "navel".__class__) # It's str, not <type 'str'> the class type of navel is string
 
         # Need an illustration? More reading can be found here:
         #
         #   https://github.com/gregmalcolm/python_koans/wiki/Class-Attribute
-
