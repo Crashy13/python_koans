@@ -61,11 +61,15 @@ class AboutMethods(Koan):
 
     def method_with_var_args(self, *args):
         return args
+        #*args leaves it open to as many or as few arguments that need to be passed in
 
     def test_calling_with_variable_arguments(self):
         self.assertEqual((), self.method_with_var_args())
+        #no arguments were passed in so it's an empty string
         self.assertEqual(('one',), self.method_with_var_args('one'))
+        #only one argument was passed in
         self.assertEqual(('one', 'two'), self.method_with_var_args('one', 'two'))
+        #two arguments were passed in
 
     # ------------------------------------------------------------------
 
@@ -76,13 +80,15 @@ class AboutMethods(Koan):
         def function_with_the_same_name(a, b):
             return a * b
 
-        self.assertEqual(__, function_with_the_same_name(3,4))
+        self.assertEqual(12, function_with_the_same_name(3,4))
+        #since there was no self in the function call, it looked to the global function without self as an argument
 
     def test_calling_methods_in_same_class_with_explicit_receiver(self):
         def function_with_the_same_name(a, b):
             return a * b
 
-        self.assertEqual(__, self.function_with_the_same_name(3,4))
+        self.assertEqual(7, self.function_with_the_same_name(3,4))
+        #since self was included in the function call, it looked to the top function with self as an argument
 
     # ------------------------------------------------------------------
 
@@ -95,10 +101,12 @@ class AboutMethods(Koan):
         return 42
 
     def test_that_old_methods_are_hidden_by_redefinitions(self):
-        self.assertEqual(__, self.another_method_with_the_same_name())
+        self.assertEqual(42, self.another_method_with_the_same_name())
+        #another_method_with_the_same_name was changed to return 42
 
     def test_that_overlapped_method_is_still_there(self):
-        self.assertEqual(__, self.link_to_overlapped_method())
+        self.assertEqual(10, self.link_to_overlapped_method())
+        #link_to_overlapped_method was set to another_method_with_the_same_name when it was still 10 before it was changed to 42
 
     # ------------------------------------------------------------------
 
@@ -106,21 +114,25 @@ class AboutMethods(Koan):
         pass
 
     def test_methods_that_do_nothing_need_to_use_pass_as_a_filler(self):
-        self.assertEqual(__, self.empty_method())
+        self.assertEqual(None, self.empty_method())
+        #an empty method has no return value
 
     def test_pass_does_nothing_at_all(self):
         "You"
         "shall"
         "not"
         pass
-        self.assertEqual(____, "Still got to this line" != None)
+        self.assertEqual(True, "Still got to this line" != None)
+        #https://www.programiz.com/python-programming/pass-statement
+        #pass is a placeholder for something to be implemented in the future
 
     # ------------------------------------------------------------------
 
     def one_line_method(self): return 'Madagascar'
 
     def test_no_indentation_required_for_one_line_statement_bodies(self):
-        self.assertEqual(__, self.one_line_method())
+        self.assertEqual('Madagascar', self.one_line_method())
+        #you don't have to break up a method into multiple lines
 
     # ------------------------------------------------------------------
 
@@ -129,7 +141,8 @@ class AboutMethods(Koan):
         return "ok"
 
     def test_the_documentation_can_be_viewed_with_the_doc_method(self):
-        self.assertRegex(self.method_with_documentation.__doc__, __)
+        self.assertRegex(self.method_with_documentation.__doc__, "A string placed at the beginning of a function is used for documentation")
+        #documentation placed at the start of a method can be called with ._doc_
 
     # ------------------------------------------------------------------
 
@@ -146,20 +159,22 @@ class AboutMethods(Koan):
 
     def test_calling_methods_in_other_objects(self):
         rover = self.Dog()
-        self.assertEqual(__, rover.name())
+        self.assertEqual("Fido", rover.name())
+        #rover is set to the class of Dog and inhereted all of it's aspects so name is "Fido"
 
     def test_private_access_is_implied_but_not_enforced(self):
         rover = self.Dog()
 
         # This is a little rude, but legal
-        self.assertEqual(__, rover._tail())
+        self.assertEqual("wagging", rover._tail())
+        #rover has the aspect of "wagging" for tail
 
     def test_attributes_with_double_underscore_prefixes_are_subject_to_name_mangling(self):
         rover = self.Dog()
-        with self.assertRaises(___): password = rover.__password()
+        with self.assertRaises(Exception): password = rover.__password()
 
         # But this still is!
-        self.assertEqual(__, rover._Dog__password())
+        self.assertEqual('password', rover._Dog__password())
 
         # Name mangling exists to avoid name clash issues when subclassing.
         # It is not for providing effective access protection

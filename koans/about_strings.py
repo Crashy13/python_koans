@@ -52,7 +52,7 @@ class AboutStrings(Koan):
     def test_use_backslash_at_the_end_of_a_line_to_continue_onto_the_next_line(self):
         string = "It was the best of times,\n\
 It was the worst of times."
-        self.assertEqual(len(string), len(string))
+        self.assertEqual(52, len(string))
         #\n\ causes the string to break out into a new line, but it's the same string
 
     def test_triple_quoted_strings_can_span_lines(self):
@@ -60,19 +60,19 @@ It was the worst of times."
 Howdy,
 world!
 """
-        self.assertEqual(len(string), len(string))
+        self.assertEqual(15, len(string))
         #https://www.geeksforgeeks.org/triple-quotes-in-python/
         #using triple quotes will cause the string to span over multiple lines
 
     def test_triple_quoted_strings_need_less_escaping(self):
         a = "Hello \"world\"."
         b = """Hello "world"."""
-        self.assertEqual((a == b), (a == b))
+        self.assertEqual("Hello \"world\"." == """Hello "world".""", (a == b))
         #since there is only a single double quote inside the triple double quotes separated by a character, no escape characters are needed
 
     def test_escaping_quotes_at_the_end_of_triple_quoted_string(self):
         string = """Hello "world\""""
-        self.assertEqual(string, string)
+        self.assertEqual("""Hello "world\"""", string)
         #since the end of the double quotes is not separated from the ending triple quotes by any characters, the escape character is needed
 
     def test_plus_concatenates_strings(self):
@@ -114,6 +114,6 @@ world!
         string = "\n"
         self.assertEqual('\n', string)
         self.assertEqual("""\n""", string)
-        self.assertEqual(len(string), len(string))
+        self.assertEqual(1, len(string))
         #https://www.geeksforgeeks.org/preventing-escape-sequence-interpretation-in-python/
         #escape characters work in most strings, except for raw string and when using double backslashes
