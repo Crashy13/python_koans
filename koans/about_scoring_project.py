@@ -33,8 +33,22 @@ from runner.koan import *
 # Your goal is to write the score method.
 
 def score(dice):
-    # You need to write this method
-    pass
+    # create a dictionary of numbers
+    sides = {1:0, 2:0, 3:0, 4:0, 5:0, 6:0}
+    # sets up the sides of the dice as a dictionary
+    for num in dice: sides[num] += 1
+    score = 0
+    for num, count in sides.items():
+        ans, rem = divmod(count, 3)
+        # divmod takes a pair of numbers and returns a tuple consisting of quotient and remainder
+        # https://www.programiz.com/python-programming/methods/built-in/divmod
+        if num == 1:
+            score += 1000 * ans + rem * 100
+        elif num == 5:
+            score += (num*100) * ans + rem * 50
+        else:
+            score += (num*100) * ans
+    return score
 
 class AboutScoringProject(Koan):
     def test_score_of_an_empty_list_is_zero(self):
