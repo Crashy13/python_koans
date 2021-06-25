@@ -16,7 +16,12 @@ class DiceSet:
     def roll(self, n):
         # Needs implementing!
         # Tip: random.randint(min, max) can be used to generate random numbers
-        pass
+        self._values = []
+        # sets self.values to an empty list
+        for i in range(0, n):
+        # iterates over the numbers in the range of 0 and the number passed in
+            self._values.append(random.randint(1, 6))
+            # adds a random number between 1 and 6 to the self._values list
 
 class AboutDiceProject(Koan):
     def test_can_create_a_dice_set(self):
