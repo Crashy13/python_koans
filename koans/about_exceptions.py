@@ -14,6 +14,7 @@ class AboutExceptions(Koan):
         self.assertEqual('Exception', mro[2].__name__)
         self.assertEqual('BaseException', mro[3].__name__)
         self.assertEqual('object', mro[4].__name__)
+        # https://docs.python.org/3/library/exceptions.html
 
     def test_try_clause(self):
         result = None
