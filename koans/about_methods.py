@@ -171,7 +171,7 @@ class AboutMethods(Koan):
 
     def test_attributes_with_double_underscore_prefixes_are_subject_to_name_mangling(self):
         rover = self.Dog()
-        with self.assertRaises(Exception): password = rover.__password()
+        with self.assertRaises(AttributeError): password = rover.__password()
 
         # But this still is!
         self.assertEqual('password', rover._Dog__password())
